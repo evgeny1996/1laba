@@ -19,6 +19,7 @@ for page in range(1, n_pages + 1):
     pixbay_responce = pixabay_api.search(q='cats dogs',
                                          image_type='photo',
                                          orientation='horizontal',
+                                         category='animals',
                                          safesearch='true',
                                          order='latest',
                                          per_page=5,
@@ -32,7 +33,7 @@ for (i, hit) in enumerate(image_list):
     logger.info('Downloading image {:d} out of {:d}'.format(i + 1, n_images))
     im_url = hit['largeImageURL']
     im_ext = im_url.split('.')[-1]
-    im_name = os.path.join('raw_images', '{:06d}.'.format(i+1) + im_ext)
+    im_name = os.path.join('image', '{:06d}.'.format(i+1) + im_ext)
     try:
         r = requests.get(im_url, stream=True)
         if r.status_code == 200:
